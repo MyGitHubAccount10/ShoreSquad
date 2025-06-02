@@ -50,12 +50,18 @@ function setupScrollAnimations() {
 }
 
 function initializeMap() {
-    // Placeholder for map initialization
-    // To be implemented with a mapping service like Mapbox or Google Maps
-    const mapContainer = document.querySelector('.map-container');
-    if (mapContainer) {
-        mapContainer.innerHTML = '<div class="placeholder">Map loading...</div>';
-    }
+    // Create the map centered on Pasir Ris
+    const map = L.map('cleanup-map').setView([1.381497, 103.955574], 15);
+
+    // Add the OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Add a marker for the cleanup location
+    const marker = L.marker([1.381497, 103.955574]).addTo(map);
+    marker.bindPopup("<b>Next Cleanup Location</b><br>Pasir Ris Beach").openPopup();
 }
 
 function initializeWeather() {
